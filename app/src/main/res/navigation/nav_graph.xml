@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/landingPageFragment">
+
+    <fragment
+        android:id="@+id/landingPageFragment"
+        android:name="com.inc.gotcha.gotcha.ui.landingpage.LandingPageFragment"
+        android:label="LandingPageFragment" >
+        <action
+            android:id="@+id/action_landingPageFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/fragment_slide_right_enter"
+            app:exitAnim="@anim/fragment_slide_left_exit"
+            app:popEnterAnim="@anim/fragment_slide_left_enter"
+            app:popExitAnim="@anim/fragment_slide_right_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.inc.gotcha.gotcha.ui.profilepage.ProfileFragment"
+        android:label="ProfileFragment" />
+</navigation>
