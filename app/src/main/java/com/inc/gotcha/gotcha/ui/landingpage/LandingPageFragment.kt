@@ -1,14 +1,12 @@
 package com.inc.gotcha.gotcha.ui.landingpage
 
-import android.app.Activity
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.text.Layout
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.inc.gotcha.gotcha.R
 import com.inc.gotcha.gotcha.databinding.LandingPageFragmentBinding
 
