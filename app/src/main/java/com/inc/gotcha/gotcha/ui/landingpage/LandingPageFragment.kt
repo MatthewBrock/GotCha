@@ -80,6 +80,11 @@ class LandingPageFragment : Fragment(), NfcController, HceController, NfcAdapter
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        nfcAdapter?.disableReaderMode(activity)
+    }
+
     private fun processIntent(intent: Intent) {
         intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)?.also { rawMsgs ->
             (rawMsgs[0] as NdefMessage).apply {
