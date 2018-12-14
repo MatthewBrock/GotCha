@@ -1,19 +1,21 @@
 package com.inc.gotcha.gotcha.ui.landingpage
 
-import android.content.Intent
-import android.nfc.*
+import android.nfc.NdefMessage
+import android.nfc.NdefRecord
+import android.nfc.NfcAdapter
+import android.nfc.Tag
 import android.nfc.tech.IsoDep
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.inc.gotcha.gotcha.HceUtils
 import com.inc.gotcha.gotcha.R
 import com.inc.gotcha.gotcha.databinding.LandingPageFragmentBinding
+import java.nio.charset.Charset
+import java.util.*
 
 class LandingPageFragment : Fragment(), NfcController, HceController, NfcAdapter.ReaderCallback {
 
@@ -32,7 +34,7 @@ class LandingPageFragment : Fragment(), NfcController, HceController, NfcAdapter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
-        viewModel = LandingPageViewModel(this)
+        viewModel = LandingPageViewModel(this, this)
         val binding: LandingPageFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.landing_page_fragment, container, false)
         binding.viewmodel = viewModel
         binding.setLifecycleOwner(this)
@@ -40,58 +42,33 @@ class LandingPageFragment : Fragment(), NfcController, HceController, NfcAdapter
     }
 
     override fun startHceScan() {
-        nfcAdapter?.setNdefPushMessage(null, activity)
         nfcAdapter?.enableReaderMode(activity, this,
                 NfcAdapter.FLAG_READER_NFC_A or
                         NfcAdapter.FLAG_READER_SKIP_NDEF_CHECK,
                 null)
     }
 
-    override fun sendNdefMessage(message: NdefMessage) {
-        /*nfcAdapter?.disableReaderMode(activity)
-        nfcAdapter?.setNdefPushMessage(message, activity)*/
+    override fun sendNdefMessage(message: String) {
+        nfcAdapter?.disableReaderMode(activity)
+        nfcAdapter?.setNdefPushMessage(NdefMessage(arrayOf(createTextRecord(message, Locale.CANADA, true))), activity)
     }
 
-    override fun createNdefMessage(): NdefMessage {
-        val text = "Beam me up, Android!\n\n" +
-                "Beam Time: " + System.currentTimeMillis()
-        return NdefMessage(
-                arrayOf(
-                        NdefRecord.createMime("application/com.inc.gotcha.gotcha", text.toByteArray())
-                )
-                /**
-                 * The Android Application Record (AAR) is commented out. When a device
-                 * receives a push with an AAR in it, the application specified in the AAR
-                 * is guaranteed to run. The AAR overrides the tag dispatch system.
-                 * You can add it back in to guarantee that this
-                 * activity starts when receiving a beamed message. For now, this code
-                 * uses the tag dispatch system.
-                 *///,NdefRecord.createApplicationRecord("com.example.android.beam")
-        )
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val grabIntent: Intent? = activity?.intent
-        grabIntent?.let {
-            if (NfcAdapter.ACTION_NDEF_DISCOVERED == grabIntent.action) {
-                processIntent(grabIntent)
-            }
-        }
+    private fun createTextRecord(payload: String, locale: Locale, encodeInUtf8: Boolean): NdefRecord {
+        val langBytes = locale.language.toByteArray(Charset.forName("US-ASCII"))
+        val utfEncoding = if (encodeInUtf8) Charset.forName("UTF-8") else Charset.forName("UTF-16")
+        val textBytes = payload.toByteArray(utfEncoding)
+        val utfBit: Int = if (encodeInUtf8) 0 else 1 shl 7
+        val status = (utfBit + langBytes.size).toChar()
+        val data = ByteArray(1 + langBytes.size + textBytes.size)
+        data[0] = status.toByte()
+        System.arraycopy(langBytes, 0, data, 1, langBytes.size)
+        System.arraycopy(textBytes, 0, data, 1 + langBytes.size, textBytes.size)
+        return NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, ByteArray(0), data)
     }
 
     override fun onPause() {
         super.onPause()
         nfcAdapter?.disableReaderMode(activity)
-    }
-
-    private fun processIntent(intent: Intent) {
-        intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)?.also { rawMsgs ->
-            (rawMsgs[0] as NdefMessage).apply {
-                // record[0] contains the MIME type, record[1] is the AAR, if present
-                viewModel.nfcMessageInput(String(records[0].payload))
-            }
-        }
     }
 
     override fun onTagDiscovered(tag: Tag?) {
@@ -100,7 +77,7 @@ class LandingPageFragment : Fragment(), NfcController, HceController, NfcAdapter
         val response = isoDep.transceive(HceUtils.hexStringToByteArray(
                 "00A4040007A0000002471001"))
         activity?.runOnUiThread {
-            viewModel.hceMessageInput(HceUtils.toHex(response))
+            viewModel.hceMessageInput(String(response))
         }
         isoDep.close()
     }

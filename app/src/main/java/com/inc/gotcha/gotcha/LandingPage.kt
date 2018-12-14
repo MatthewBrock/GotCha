@@ -11,7 +11,10 @@ class LandingPage : AppCompatActivity() {
         setContentView(R.layout.landing_page_activity)
     }
 
-    override fun onNewIntent(intent: Intent) {
-        setIntent(intent)
+    override fun onResume() {
+        super.onResume()
+        val hceServiceIntent = Intent(this.applicationContext, HostCardEmulatorService::class.java)
+        hceServiceIntent.putExtra("Data", "yolo swag bughati")
+        startService(hceServiceIntent)// a bit of a hack to send data to this service, binding to it is hard
     }
 }

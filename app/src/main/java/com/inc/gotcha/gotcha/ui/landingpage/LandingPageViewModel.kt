@@ -1,6 +1,5 @@
 package com.inc.gotcha.gotcha.ui.landingpage
 
-import android.nfc.NdefMessage
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,15 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
 import com.inc.gotcha.gotcha.R
 
-class LandingPageViewModel(private val nfcController: NfcController) : ViewModel(), ILandingPageViewModel {
+class LandingPageViewModel(private val nfcController: NfcController, private val hceController: HceController) : ViewModel(), ILandingPageViewModel {
 
     private val title = MutableLiveData<String>()
-    private val nfcMessage = MutableLiveData<String>()
     private val hceMessage = MutableLiveData<String>()
 
     init {
         title.value = "Hey there"
-        nfcMessage.value = "No NFC Message yet"
         hceMessage.value = "No HCE message yet"
     }
 
@@ -29,19 +26,11 @@ class LandingPageViewModel(private val nfcController: NfcController) : ViewModel
     }
 
     override fun setNfcMessage() {
-        nfcController.sendNdefMessage(nfcController.createNdefMessage())
-    }
-
-    override fun nfcMessage(): LiveData<String> {
-        return nfcMessage
+        nfcController.sendNdefMessage("Yolo swag bugahti boiyoi ")
     }
 
     override fun hceMessage(): LiveData<String> {
         return hceMessage
-    }
-
-    fun nfcMessageInput(message: String) {
-        nfcMessage.value = message
     }
 
     fun hceMessageInput(message: String) {
@@ -49,6 +38,6 @@ class LandingPageViewModel(private val nfcController: NfcController) : ViewModel
     }
 
     override fun startHceScan() {
-
+        hceController.startHceScan()
     }
 }
