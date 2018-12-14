@@ -21,7 +21,7 @@ class ContactListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProviders.of(this).get(ContactListViewModel::class.java)
-        val binding: ContactListFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.profile_fragment, container, false)
+        val binding: ContactListFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.profile_fragament, container, false)
         binding.viewmodel = viewModel
         binding.setLifecycleOwner(this)
         return binding.root
