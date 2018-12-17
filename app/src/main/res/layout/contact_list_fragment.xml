@@ -9,14 +9,17 @@
             type="com.inc.gotcha.gotcha.ui.contactlistpage.IContactListViewModel" />
     </data>
 
-    <FrameLayout
+    <android.support.constraint.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context="com.inc.gotcha.gotcha.ui.contactlistpage">
 
-        <TextView
+        <android.support.v7.widget.RecyclerView
+
+            android:id="@+id/rv_animal_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello" />
+            android:layout_height="match_parent" />
 
-    </FrameLayout>
+    </android.support.constraint.ConstraintLayout>
 </layout>
