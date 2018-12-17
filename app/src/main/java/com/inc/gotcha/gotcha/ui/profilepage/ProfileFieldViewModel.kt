@@ -4,15 +4,17 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ProfileFieldViewModel(val saveCallback: (String?, String?) -> Unit) : ViewModel(), IProfileFieldViewModel {
+class ProfileFieldViewModel(val handle: String?, val saveCallback: (String?, String?) -> Unit) : ViewModel(), IProfileFieldViewModel {
     override val mediaType = MutableLiveData<String>()
     override val mediaHandle = MutableLiveData<String>()
+    override val defaultText = MutableLiveData<String>()
     override val showDefault = MutableLiveData<Int>()
     override val showList = MutableLiveData<Int>()
     override val showEditor = MutableLiveData<Int>()
 
     init {
         mediaHandle.value = ""
+        defaultText.value = handle
 
         showDefault.value = View.VISIBLE
         showList.value = View.GONE
