@@ -10,16 +10,17 @@
     </data>
 
     <android.support.constraint.ConstraintLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.inc.gotcha.gotcha.ui.contactlistpage">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
 
-            android:id="@+id/rv_animal_list"
+            android:id="@+id/contact_card_recycler_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
 
     </android.support.constraint.ConstraintLayout>
+
 </layout>
