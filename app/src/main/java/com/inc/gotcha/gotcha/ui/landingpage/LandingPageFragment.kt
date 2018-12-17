@@ -11,7 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.google.gson.Gson
 import com.inc.gotcha.gotcha.HceUtils
+import com.inc.gotcha.gotcha.ProfileData
 import com.inc.gotcha.gotcha.R
 import com.inc.gotcha.gotcha.databinding.LandingPageFragmentBinding
 import java.nio.charset.Charset
@@ -76,9 +78,11 @@ class LandingPageFragment : Fragment(), NfcController, HceController, NfcAdapter
         isoDep.connect()
         val response = isoDep.transceive(HceUtils.hexStringToByteArray(
                 "00A4040007A0000002471001"))
-        activity?.runOnUiThread {
+        var ProfileData = Gson().fromJson(String(response), ProfileData::class.java)
+
+        /*activity?.runOnUiThread {
             viewModel.hceMessageInput(String(response))
-        }
+        }*/
         isoDep.close()
     }
 }
