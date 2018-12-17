@@ -34,7 +34,7 @@ class ProfileFragment : Fragment() {
 
         mediaList.addAll("Email,Phone,Kik,Facebook,Twitter,Instagram,Youtube,LinkedIn".split(","))
 
-        viewModel = ProfileViewModel(context?.getSharedPreferences(getString(R.string.profile_data), Context.MODE_PRIVATE))
+        viewModel = ProfileViewModel(context?.getSharedPreferences(getString(R.string.profile_data), Context.MODE_PRIVATE), resources)
 
         fieldViewModels.addAll(viewModel.getFieldVMs() as Collection<IProfileFieldViewModel>)
 

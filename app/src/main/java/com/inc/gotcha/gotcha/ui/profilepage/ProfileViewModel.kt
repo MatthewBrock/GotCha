@@ -1,12 +1,14 @@
 package com.inc.gotcha.gotcha.ui.profilepage
 
 import android.content.SharedPreferences
+import android.content.res.Resources
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.inc.gotcha.gotcha.MediaElement
 import com.inc.gotcha.gotcha.ProfileData
+import com.inc.gotcha.gotcha.R
 
-class ProfileViewModel(val sharedPref: SharedPreferences?) : ViewModel(), IProfileViewModel {
+class ProfileViewModel(val sharedPref: SharedPreferences?, val resources: Resources) : ViewModel(), IProfileViewModel {
     val PROFILE = "PROFILE"
 
     private val fieldVMs = ArrayList<IProfileFieldViewModel>()
@@ -25,7 +27,7 @@ class ProfileViewModel(val sharedPref: SharedPreferences?) : ViewModel(), IProfi
         }
 
         while(fieldVMs.size < 5) {
-            fieldVMs.add(ProfileFieldViewModel("Add Profile"){a, b -> save(a,b)})
+            fieldVMs.add(ProfileFieldViewModel(resources.getString(R.string.add_new_profile)){ a, b -> save(a,b)})
         }
     }
 
