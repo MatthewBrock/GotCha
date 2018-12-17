@@ -8,15 +8,44 @@
             type="com.inc.gotcha.gotcha.ui.profilepage.IProfileViewModel" />
 
         <variable
+            name="fieldViewModel0"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
+        <variable
             name="fieldViewModel1"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
+        <variable
+            name="fieldViewModel2"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
+        <variable
+            name="fieldViewModel3"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
+        <variable
+            name="fieldViewModel4"
             type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
     </data>
 
     <LinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <include layout="@layout/profile_field_input"
+            android:id="@+id/media0"
+            app:viewmodel="@{fieldViewModel0}" />
+
         <include layout="@layout/profile_field_input"
             android:id="@+id/media1"
             app:viewmodel="@{fieldViewModel1}" />
+
+        <include layout="@layout/profile_field_input"
+            android:id="@+id/media2"
+            app:viewmodel="@{fieldViewModel2}" />
+
+        <include layout="@layout/profile_field_input"
+            android:id="@+id/media3"
+            app:viewmodel="@{fieldViewModel3}" />
+
+        <include layout="@layout/profile_field_input"
+            android:id="@+id/media4"
+            app:viewmodel="@{fieldViewModel4}" />
     </LinearLayout>
 </layout>

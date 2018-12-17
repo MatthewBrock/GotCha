@@ -7,8 +7,21 @@
         <variable
             name="viewmodel"
             type="com.inc.gotcha.gotcha.ui.profilepage.IProfileViewModel" />
+
+        <variable
+            name="fieldViewModel0"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
         <variable
             name="fieldViewModel1"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
+        <variable
+            name="fieldViewModel2"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
+        <variable
+            name="fieldViewModel3"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
+        <variable
+            name="fieldViewModel4"
             type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
     </data>
 
@@ -38,7 +51,11 @@
                 <include layout="@layout/social_media_inputs"
                     android:id="@+id/media_inputs"
                     app:viewmodel="@{viewmodel}"
-                    app:fieldViewModel1="@{fieldViewModel1}"/>
+                    app:fieldViewModel0="@{fieldViewModel0}"
+                    app:fieldViewModel1="@{fieldViewModel1}"
+                    app:fieldViewModel2="@{fieldViewModel2}"
+                    app:fieldViewModel3="@{fieldViewModel3}"
+                    app:fieldViewModel4="@{fieldViewModel4}"/>
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

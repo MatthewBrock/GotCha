@@ -1,7 +1,6 @@
 package com.inc.gotcha.gotcha.ui.profilepage
 
 import android.content.SharedPreferences
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.inc.gotcha.gotcha.MediaElement
@@ -10,15 +9,27 @@ import com.inc.gotcha.gotcha.ProfileData
 class ProfileViewModel(val sharedPref: SharedPreferences?) : ViewModel(), IProfileViewModel {
     val PROFILE = "PROFILE"
 
-    override val name = MutableLiveData<String>()
-    override val email = MutableLiveData<String>()
-    override val phone = MutableLiveData<String>()
-    override val kik = MutableLiveData<String>()
-    override val facebook = MutableLiveData<String>()
-    override val twitter = MutableLiveData<String>()
-    override val instagram = MutableLiveData<String>()
-    override val youtube = MutableLiveData<String>()
-    override val linkedin = MutableLiveData<String>()
+    private val fieldVMs = ArrayList<IProfileFieldViewModel>()
+
+    init {
+        val profileDataString = sharedPref?.getString(PROFILE,"{}")
+        val data = Gson().fromJson(profileDataString, ProfileData::class.java)
+
+        var mediaList = ArrayList<MediaElement>()
+
+        if(data?.mediaList != null)
+            mediaList.addAll(data.mediaList)
+
+        for(i in 0..Math.min(5, mediaList.size) - 1) {
+            fieldVMs.add(ProfileFieldViewModel(mediaList[i]?.mediaHandle){a, b -> save(a,b)})
+        }
+
+        while(fieldVMs.size < 5) {
+            fieldVMs.add(ProfileFieldViewModel("Add Profile"){a, b -> save(a,b)})
+        }
+    }
+
+    override fun getFieldVMs(): ArrayList<IProfileFieldViewModel> = fieldVMs
 
     override fun save(mediaType: String?, mediaHandle: String?) {
         println("$mediaType $mediaHandle")
