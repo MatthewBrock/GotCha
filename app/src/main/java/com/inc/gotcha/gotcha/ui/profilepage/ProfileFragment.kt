@@ -112,6 +112,8 @@ class ProfileFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+
+            //This will be changed to a switch with ENUMs
             if(mediaList[position].equals("Email")) {
                 holder.imageView.setImageDrawable(resources.getDrawable(R.drawable.img_email))
             } else if(mediaList[position].equals("Phone")) {
