@@ -16,7 +16,7 @@
     </style>
 
     <style name="FullButtonStyle">
-        <item name="android:background">@drawable/full_button</item>
+        <item name="android:background">@drawable/gradient_button</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">normal</item>
         <item name="android:stateListAnimator">@null</item>

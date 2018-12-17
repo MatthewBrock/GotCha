@@ -94,7 +94,7 @@
             android:id="@+id/find_your_friend_button"
             style="@style/FullButtonStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="64dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:layout_marginBottom="16dp"
