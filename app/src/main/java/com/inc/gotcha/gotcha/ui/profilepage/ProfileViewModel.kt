@@ -23,11 +23,11 @@ class ProfileViewModel(val sharedPref: SharedPreferences?, val resources: Resour
             mediaList.addAll(data.mediaList)
 
         for(i in 0..Math.min(5, mediaList.size) - 1) {
-            fieldVMs.add(ProfileFieldViewModel(mediaList[i]?.mediaHandle){a, b -> save(a,b)})
+            fieldVMs.add(ProfileFieldViewModel(mediaList[i]?.mediaHandle, resources){a, b -> save(a,b)})
         }
 
         while(fieldVMs.size < 5) {
-            fieldVMs.add(ProfileFieldViewModel(resources.getString(R.string.add_new_profile)){ a, b -> save(a,b)})
+            fieldVMs.add(ProfileFieldViewModel(resources.getString(R.string.add_new_profile), resources){ a, b -> save(a,b)})
         }
     }
 

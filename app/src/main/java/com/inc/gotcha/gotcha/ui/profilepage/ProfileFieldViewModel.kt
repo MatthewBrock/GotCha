@@ -1,10 +1,12 @@
 package com.inc.gotcha.gotcha.ui.profilepage
 
+import android.content.res.Resources
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ProfileFieldViewModel(val handle: String?, val saveCallback: (String?, String?) -> Unit) : ViewModel(), IProfileFieldViewModel {
+class ProfileFieldViewModel(val handle: String?, val resources: Resources,
+                            val saveCallback: (String?, String?) -> Unit) : ViewModel(), IProfileFieldViewModel {
     override val mediaType = MutableLiveData<String>()
     override val mediaHandle = MutableLiveData<String>()
     override val defaultText = MutableLiveData<String>()
@@ -37,5 +39,11 @@ class ProfileFieldViewModel(val handle: String?, val saveCallback: (String?, Str
 
     override fun onSaveClicked() {
         saveCallback(mediaType.value, mediaHandle.value)
+
+        defaultText.value = mediaHandle.value;
+
+        showDefault.value = View.VISIBLE
+        showList.value = View.GONE
+        showEditor.value = View.GONE
     }
 }
