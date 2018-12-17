@@ -1,142 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
             name="viewmodel"
             type="com.inc.gotcha.gotcha.ui.profilepage.IProfileViewModel" />
+
+        <variable
+            name="fieldViewModel1"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
     </data>
 
     <LinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/field_name"
-            android:layout_margin="12dp">
-
-            <EditText
-                android:id="@+id/field_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="@={ viewmodel.name }"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/field_email"
-            android:layout_margin="12dp">
-
-            <EditText
-                android:id="@+id/field_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:inputType="textEmailAddress"
-                android:text="@={ viewmodel.email }"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/field_phone"
-            android:layout_margin="12dp">
-
-            <EditText
-                android:id="@+id/field_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:inputType="phone"
-                android:text="@={ viewmodel.phone }"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/field_kik"
-            android:layout_margin="12dp">
-
-            <EditText
-                android:id="@+id/field_kik"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="@={ viewmodel.kik }"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/field_facebook"
-            android:layout_margin="12dp">
-
-            <EditText
-                android:id="@+id/field_facebook"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="@={ viewmodel.facebook }"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/field_twitter"
-            android:layout_margin="12dp">
-
-            <EditText
-                android:id="@+id/field_twitter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="@={ viewmodel.twitter }"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/field_instagram"
-            android:layout_margin="12dp">
-
-            <EditText
-                android:id="@+id/field_instagram"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="@={ viewmodel.instagram }"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/field_youtube"
-            android:layout_margin="12dp">
-
-            <EditText
-                android:id="@+id/field_youtube"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="@={ viewmodel.youtube }"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/field_linkedin"
-            android:layout_margin="12dp">
-
-            <EditText
-                android:id="@+id/field_linkedin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="@={ viewmodel.linkedin }"/>
-        </com.google.android.material.textfield.TextInputLayout>
+        <include layout="@layout/profile_field_input"
+            android:id="@+id/media1"
+            app:viewmodel="@{fieldViewModel1}" />
     </LinearLayout>
 </layout>
