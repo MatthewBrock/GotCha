@@ -1,10 +1,12 @@
 package com.inc.gotcha.gotcha.ui.profilepage
 
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -40,7 +42,7 @@ class ProfileFragment : Fragment() {
 
         val binding: ProfileFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.profile_fragment, container, false)
 
-        setUpRecyclerViews(binding)
+        setUpRecyclerViews(binding, resources)
 
         binding.viewmodel = viewModel
 
@@ -54,10 +56,10 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
-    fun setUpRecyclerViews(binding: ProfileFragmentBinding) {
+    fun setUpRecyclerViews(binding: ProfileFragmentBinding, resources: Resources) {
         for(i in 0..4) {
             viewManagers.add(LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false))
-            viewAdapters.add(MyAdapter(mediaList, fieldViewModels[i]))
+            viewAdapters.add(MyAdapter(mediaList, resources, fieldViewModels[i]))
         }
 
         recyclerViews.add(binding.root.findViewById<View>(R.id.media_inputs).findViewById<View>(R.id.media0)
@@ -96,21 +98,39 @@ class ProfileFragment : Fragment() {
                 })
     }
 
-    class MyAdapter(private val mediaList: ArrayList<String>, private val vm: IProfileFieldViewModel) :
+    class MyAdapter(private val mediaList: ArrayList<String>, private val resources: Resources,
+                    private val vm: IProfileFieldViewModel) :
             RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
-        class MyViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
+        class MyViewHolder(val imageView: ImageView) : RecyclerView.ViewHolder(imageView)
 
         override fun onCreateViewHolder(parent: ViewGroup,
                                         viewType: Int): MyAdapter.MyViewHolder {
-            val textView = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.media_selection_element, parent, false) as TextView
-            return MyViewHolder(textView)
+            val imageView = LayoutInflater.from(parent.context)
+                    .inflate(R.layout.media_selection_element, parent, false) as ImageView
+            return MyViewHolder(imageView)
         }
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-            holder.textView.text = mediaList[position]
-            holder.textView.setOnClickListener { vm.onTypeSelected(mediaList[position]) }
+            if(mediaList[position].equals("Email")) {
+                holder.imageView.setImageDrawable(resources.getDrawable(R.drawable.img_email))
+            } else if(mediaList[position].equals("Phone")) {
+                holder.imageView.setImageDrawable(resources.getDrawable(R.drawable.img_phone))
+            } else if(mediaList[position].equals("Kik")) {
+                holder.imageView.setImageDrawable(resources.getDrawable(R.drawable.img_kik))
+            } else if(mediaList[position].equals("Facebook")) {
+                holder.imageView.setImageDrawable(resources.getDrawable(R.drawable.img_facebook))
+            } else if(mediaList[position].equals("Twitter")) {
+                holder.imageView.setImageDrawable(resources.getDrawable(R.drawable.img_twitter))
+            } else if(mediaList[position].equals("Instagram")) {
+                holder.imageView.setImageDrawable(resources.getDrawable(R.drawable.img_instagram))
+            } else if(mediaList[position].equals("Youtube")) {
+                holder.imageView.setImageDrawable(resources.getDrawable(R.drawable.img_youtube))
+            } else {
+                holder.imageView.setImageDrawable(resources.getDrawable(R.drawable.img_linkedin))
+            }
+
+            holder.imageView.setOnClickListener { vm.onTypeSelected(mediaList[position]) }
         }
 
         override fun getItemCount() = mediaList.size
