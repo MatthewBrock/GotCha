@@ -7,6 +7,9 @@
         <variable
             name="viewmodel"
             type="com.inc.gotcha.gotcha.ui.profilepage.IProfileViewModel" />
+        <variable
+            name="fieldViewModel1"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,14 +36,9 @@
                     android:layout_marginRight="94dp"/>
 
                 <include layout="@layout/social_media_inputs"
-                    app:viewmodel="@{viewmodel}"/>
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:text="@string/save"
-                    android:onClick="@{() -> viewmodel.save()}"/>
+                    android:id="@+id/media_inputs"
+                    app:viewmodel="@{viewmodel}"
+                    app:fieldViewModel1="@{fieldViewModel1}"/>
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

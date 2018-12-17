@@ -13,5 +13,5 @@ interface IProfileViewModel {
     val youtube: MutableLiveData<String>
     val linkedin: MutableLiveData<String>
 
-    fun save()
+    fun save(type: String?, mediaString: String?)
 }
