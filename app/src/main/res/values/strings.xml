@@ -14,4 +14,6 @@
     <string name="field_linkedin">LinkedIn</string>
 
     <string name="save">Save</string>
+    <string name="servicedesc">Host Card Emulator Service</string>
+    <string name="aiddescription">Sample AID for testing</string>
 </resources>
