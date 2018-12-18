@@ -7,7 +7,6 @@
     <string name="scan_for_humans">Scan For Humans</string>
     <string name="set_profile">Set Up Profile</string>
 
-
     <string name="profile_data">PROFILE_DATA</string>
 
     <string name="field_name">Name</string>
@@ -24,4 +23,8 @@
     <string name="save">Save</string>
     <string name="servicedesc">Host Card Emulator Service</string>
     <string name="aiddescription">Sample AID for testing</string>
+
+    <string name="add_new_profile">Add New Profile</string>
+    <string name="add_a_handle">Add a Handle</string>
+
 </resources>

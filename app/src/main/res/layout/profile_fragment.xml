@@ -7,8 +7,21 @@
         <variable
             name="viewmodel"
             type="com.inc.gotcha.gotcha.ui.profilepage.IProfileViewModel" />
+
+        <variable
+            name="fieldViewModel0"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
         <variable
             name="fieldViewModel1"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
+        <variable
+            name="fieldViewModel2"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
+        <variable
+            name="fieldViewModel3"
+            type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
+        <variable
+            name="fieldViewModel4"
             type="com.inc.gotcha.gotcha.ui.profilepage.IProfileFieldViewModel" />
     </data>
 
@@ -26,20 +39,34 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_blank_profile_pic"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:layout_marginLeft="94dp"
-                    android:layout_marginRight="94dp"/>
-
                 <include layout="@layout/social_media_inputs"
                     android:id="@+id/media_inputs"
                     app:viewmodel="@{viewmodel}"
-                    app:fieldViewModel1="@{fieldViewModel1}"/>
+                    app:fieldViewModel0="@{fieldViewModel0}"
+                    app:fieldViewModel1="@{fieldViewModel1}"
+                    app:fieldViewModel2="@{fieldViewModel2}"
+                    app:fieldViewModel3="@{fieldViewModel3}"
+                    app:fieldViewModel4="@{fieldViewModel4}"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="92dp"/>
             </LinearLayout>
         </ScrollView>
+
+        <Button
+            android:id="@+id/find_your_friend_button"
+            style="@style/FullButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/add_a_handle"
+            android:visibility="@{viewmodel.buttonVisibility}"
+            android:onClick="@{() -> viewmodel.addHandle()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
