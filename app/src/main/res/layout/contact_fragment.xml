@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,14 +11,77 @@
             type="com.inc.gotcha.gotcha.ui.contactpage.IContactViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello" />
+            android:layout_height="wrap_content"
+            android:src="@drawable/ufo_home_gradient"
+            app:layout_constraintBottom_toTopOf="@id/icon_wrapper" />
 
-    </FrameLayout>
+        <Button
+            android:id="@+id/add_friend_button"
+            style="@style/FullButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/add_friend"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/icon_wrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/contact_info_card_view_pager"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <ImageView
+                android:id="@+id/first_image"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_marginRight="8dp"
+                tools:src="@drawable/icn_facebook" />
+
+            <ImageView
+                android:id="@+id/second_image"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                tools:src="@drawable/icn_instagram" />
+
+            <ImageView
+                android:id="@+id/third_image"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                tools:src="@drawable/icn_kik" />
+
+            <ImageView
+                android:id="@+id/fourth_image"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                tools:src="@drawable/icn_phone" />
+
+            <ImageView
+                android:id="@+id/fifth_image"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                tools:src="@drawable/icn_youtube" />
+        </LinearLayout>
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/contact_info_card_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="204dp"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toTopOf="@id/add_friend_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

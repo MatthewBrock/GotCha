@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/landingPageFragment">
 
     <fragment
         android:id="@+id/landingPageFragment"
         android:name="com.inc.gotcha.gotcha.ui.landingpage.LandingPageFragment"
-        android:label="LandingPageFragment" >
+        android:label="LandingPageFragment">
         <action
             android:id="@+id/action_landingPageFragment_to_profileFragment"
             app:destination="@id/profileFragment"
@@ -28,7 +29,7 @@
     <fragment
         android:id="@+id/contactListFragment"
         android:name="com.inc.gotcha.gotcha.ui.contactlistpage.ContactListFragment"
-        android:label="ContactListFragment" >
+        android:label="ContactListFragment">
         <action
             android:id="@+id/action_contactListFragment_to_contactFragment"
             app:destination="@id/contactFragment" />
@@ -36,5 +37,10 @@
     <fragment
         android:id="@+id/contactFragment"
         android:name="com.inc.gotcha.gotcha.ui.contactpage.ContactFragment"
-        android:label="ContactFragment" />
+        android:label="ContactFragment">
+        <argument
+            android:name="contact"
+            android:defaultValue="no_contact"
+            app:argType="string" />
+    </fragment>
 </navigation>

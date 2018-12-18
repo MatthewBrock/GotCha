@@ -17,6 +17,7 @@
     <string name="field_instagram">Instagram</string>
     <string name="field_youtube">Youtube</string>
     <string name="field_linkedin">LinkedIn</string>
+    <string name="add_friend">Add Friend</string>
 
     <string name="save">Save</string>
     <string name="servicedesc">Host Card Emulator Service</string>
