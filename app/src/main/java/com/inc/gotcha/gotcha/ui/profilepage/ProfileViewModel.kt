@@ -119,6 +119,7 @@ class ProfileViewModel(val sharedPref: SharedPreferences?, val resources: Resour
     override fun editName() {
         showName.value = View.GONE
         showEdit.value = View.VISIBLE
+        buttonVisibility.value = View.GONE
     }
 
     override fun saveName() {
@@ -151,5 +152,8 @@ class ProfileViewModel(val sharedPref: SharedPreferences?, val resources: Resour
 
         showEdit.value = View.GONE
         showName.value = View.VISIBLE
+
+        if(nextVMIndex < 5)
+            buttonVisibility.value = View.VISIBLE
     }
 }
