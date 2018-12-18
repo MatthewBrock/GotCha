@@ -10,9 +10,10 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.viewpager.widget.PagerAdapter
 import com.inc.gotcha.gotcha.MediaElement
+import com.inc.gotcha.gotcha.ProfileData
 import com.inc.gotcha.gotcha.R
 
-class MediaElementViewPagerAdapter(private val context: Context, private val mediaElementList: List<MediaElement>) : PagerAdapter() {
+class MediaElementViewPagerAdapter(private val context: Context, private val mediaElementList: List<MediaElement>, private val profileData: ProfileData) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val mediaElement = mediaElementList[position]
@@ -22,7 +23,7 @@ class MediaElementViewPagerAdapter(private val context: Context, private val med
         val contentImageType = viewGroup.findViewById<ImageView>(R.id.contact_type_image)
         val titleText = viewGroup.findViewById<TextView>(R.id.title)
         val descriptionText = viewGroup.findViewById<TextView>(R.id.description)
-        titleText.text = mediaElement.mediaHandle
+        titleText.text = profileData.name
         descriptionText.text = mediaElement.mediaHandle
         setImage(mediaElement, contentImageType, cardView)
         container.addView(viewGroup)
