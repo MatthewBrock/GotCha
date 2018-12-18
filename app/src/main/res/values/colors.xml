@@ -9,4 +9,15 @@
     <color name="gotcha_white">#FFFFFF</color>
     <color name="status_bar_tint">#16000000</color>
 
+    <color name="kik_color">#b369cb26</color>
+    <color name="fb_color">#b34064ac</color>
+    <color name="insta_color">#b3a33ebb</color>
+    <color name="twitter_color">#b328a9e0</color>
+    <color name="email_color">#b3E24029</color>
+    <color name="linkedin_color">#b33F64AB</color>
+    <color name="phone_color">#b3FE8101</color>
+    <color name="youtube_color">#b3F60100</color>
+
+    <color name="transparent_color">#00000000</color>
+
 </resources>

@@ -5,7 +5,6 @@
     <string name="beam_me_up">Beam Me Up!</string>
     <string name="find_friends">Find Your Friends</string>
 
-
     <string name="profile_data">PROFILE_DATA</string>
 
     <string name="field_name">Name</string>
@@ -23,4 +22,6 @@
     <string name="aiddescription">Sample AID for testing</string>
 
     <string name="add_new_profile">Add New Profile</string>
+    <string name="add_a_handle">Add a Handle</string>
+
 </resources>
