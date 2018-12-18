@@ -22,4 +22,15 @@
         <item name="android:stateListAnimator">@null</item>
         <item name="android:textColor">@color/gotcha_white</item>/>
     </style>
+
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/gotcha_white</item>
+        <item name="android:textSize">20sp</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/gotcha_white</item>
+        <item name="colorControlNormal">@color/gotcha_white</item>
+        <item name="colorControlActivated">@color/gotcha_white</item>
+    </style>
+
 </resources>

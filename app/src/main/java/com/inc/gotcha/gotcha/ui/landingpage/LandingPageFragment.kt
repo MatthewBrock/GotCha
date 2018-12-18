@@ -8,14 +8,21 @@ import android.nfc.tech.IsoDep
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.google.gson.Gson
 import com.inc.gotcha.gotcha.HceUtils
 import com.inc.gotcha.gotcha.ProfileData
 import com.inc.gotcha.gotcha.R
 import com.inc.gotcha.gotcha.databinding.LandingPageFragmentBinding
+import kotlinx.android.synthetic.main.landing_page_fragment.*
 import java.nio.charset.Charset
 import java.util.*
 
@@ -44,6 +51,9 @@ class LandingPageFragment : Fragment(), NfcController, HceController, NfcAdapter
     }
 
     override fun startHceScan() {
+        ufo_image.visibility = INVISIBLE
+        lottie_animation.visibility = VISIBLE
+        lottie_animation.playAnimation()
         nfcAdapter?.enableReaderMode(activity, this,
                 NfcAdapter.FLAG_READER_NFC_A or
                         NfcAdapter.FLAG_READER_SKIP_NDEF_CHECK,
@@ -78,11 +88,14 @@ class LandingPageFragment : Fragment(), NfcController, HceController, NfcAdapter
         isoDep.connect()
         val response = isoDep.transceive(HceUtils.hexStringToByteArray(
                 "00A4040007A0000002471001"))
-        var ProfileData = Gson().fromJson(String(response), ProfileData::class.java)
 
-        /*activity?.runOnUiThread {
+        activity?.runOnUiThread {
             viewModel.hceMessageInput(String(response))
-        }*/
+            val profileData = String(response)
+            val action = LandingPageFragmentDirections.actionLandingPageFragmentToContactFragment()
+            action.setContact(profileData)
+            NavHostFragment.findNavController(this).navigate(action)
+        }
         isoDep.close()
     }
 }
