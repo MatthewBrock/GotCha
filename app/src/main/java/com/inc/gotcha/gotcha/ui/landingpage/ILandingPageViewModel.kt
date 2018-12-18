@@ -11,6 +11,8 @@ interface ILandingPageViewModel {
 
     fun onNextButtonClicked(): View.OnClickListener
 
+    fun onContactsButtonClicked(): View.OnClickListener
+
     fun setNfcMessage()
 
     fun startHceScan()

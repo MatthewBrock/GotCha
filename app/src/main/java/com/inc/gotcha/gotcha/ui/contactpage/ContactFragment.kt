@@ -1,5 +1,6 @@
 package com.inc.gotcha.gotcha.ui.contactpage
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,13 @@ import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.NavHostFragment
 import com.google.gson.Gson
 import com.inc.gotcha.gotcha.MediaElement
 import com.inc.gotcha.gotcha.ProfileData
 import com.inc.gotcha.gotcha.R
 import com.inc.gotcha.gotcha.databinding.ContactFragmentBinding
+import com.inc.gotcha.gotcha.ui.landingpage.LandingPageFragmentDirections
 import kotlinx.android.synthetic.main.contact_fragment.*
 
 class ContactFragment : Fragment() {
@@ -21,6 +24,7 @@ class ContactFragment : Fragment() {
 
     companion object {
         fun newInstance() = ContactFragment()
+        const val CONTACT = "CONTACT"
     }
 
     private lateinit var viewModel: ContactViewModel
@@ -38,6 +42,7 @@ class ContactFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         val args: ContactFragmentArgs = ContactFragmentArgs.fromBundle(arguments)
+        add_friend_button.setOnClickListener { saveProfile() }
         profile = Gson().fromJson(args.contact, ProfileData::class.java)
         if (context != null && profile != null) {
             contact_info_card_view_pager.adapter = MediaElementViewPagerAdapter(context!!, profile!!.mediaList.take(5))
@@ -87,5 +92,26 @@ class ContactFragment : Fragment() {
                 imageView.setImageResource(R.drawable.icn_linkedin)
             }
         }
+    }
+
+    private fun saveProfile() {
+        val sharedPref = activity?.getSharedPreferences(getString(R.string.contact_data), Context.MODE_PRIVATE)
+        val profileDataListString = sharedPref?.getString(CONTACT, "{}")
+        var dataArray: Array<ProfileData>
+        dataArray = if (profileDataListString.equals("{}")) {
+            emptyArray()
+        } else {
+            Gson().fromJson<Array<ProfileData>>(profileDataListString, Array<ProfileData>::class.java)
+        }
+        val dataList: ArrayList<ProfileData> = dataArray.toCollection(ArrayList())
+        dataList.add(profile!!)
+        val dataListString = Gson().toJson(dataList.toArray())
+        val editor = sharedPref?.edit()
+        editor?.putString(CONTACT, dataListString)
+        editor?.apply()
+
+        val action = ContactFragmentDirections.actionContactFragmentToContactListFragment()
+        NavHostFragment.findNavController(this).navigate(action)
+
     }
 }

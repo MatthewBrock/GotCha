@@ -21,4 +21,6 @@
 
     <color name="transparent_color">#00000000</color>
 
+    <color name="line_divider">#E0E1E9</color>
+
 </resources>

@@ -25,6 +25,10 @@ class LandingPageViewModel(private val nfcController: NfcController, private val
         return Navigation.createNavigateOnClickListener(R.id.action_landingPageFragment_to_profileFragment, null)
     }
 
+    override fun onContactsButtonClicked(): View.OnClickListener {
+        return Navigation.createNavigateOnClickListener(R.id.action_landingPageFragment_to_contactListFragment, null)
+    }
+
     override fun setNfcMessage() {
         nfcController.sendNdefMessage("Yolo swag bugahti boiyoi ")
     }

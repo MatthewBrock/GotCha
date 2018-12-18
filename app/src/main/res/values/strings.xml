@@ -9,6 +9,9 @@
 
     <string name="profile_data">PROFILE_DATA</string>
 
+    <string name="contact_data">CONTACT_DATA</string>
+    <string name="my_contacts">My Contacts</string>
+
     <string name="field_name">Name</string>
     <string name="field_email">Email</string>
     <string name="field_phone">Phone Number</string>
