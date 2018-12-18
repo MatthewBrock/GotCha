@@ -28,6 +28,9 @@
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <include layout="@layout/name_field"
+            app:viewmodel="@{viewmodel}" />
+
         <include layout="@layout/profile_field_input"
             android:id="@+id/media0"
             app:viewmodel="@{fieldViewModel0}" />
