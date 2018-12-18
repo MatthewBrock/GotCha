@@ -13,12 +13,18 @@ class ProfileViewModel(val sharedPref: SharedPreferences?, val resources: Resour
     val PROFILE = "PROFILE"
 
     override val buttonVisibility = MutableLiveData<Int>()
+    override val showEdit = MutableLiveData<Int>()
+    override val showName = MutableLiveData<Int>()
+    override val name = MutableLiveData<String>()
 
     private val fieldVMs = ArrayList<IProfileFieldViewModel>()
 
     private var nextVMIndex = 5
 
     init {
+        showEdit.value = View.GONE
+        showName.value = View.VISIBLE
+
         val profileDataString = sharedPref?.getString(PROFILE,"{}")
         val data = Gson().fromJson(profileDataString, ProfileData::class.java)
 
@@ -26,6 +32,16 @@ class ProfileViewModel(val sharedPref: SharedPreferences?, val resources: Resour
 
         if(data?.mediaList != null)
             mediaList.addAll(data.mediaList)
+
+        name.value = "Name Here"
+
+        for(i in 0..mediaList.size-1) {
+            if(mediaList[i].mediaType.equals("name")) {
+                name.value = mediaList[i].mediaHandle
+                mediaList.removeAt(i)
+                break
+            }
+        }
 
         for(i in 0..Math.min(5, mediaList.size) - 1) {
             fieldVMs.add(ProfileFieldViewModel(true, mediaList[i]?.mediaHandle, mediaList[i]?.mediaType,
@@ -98,5 +114,46 @@ class ProfileViewModel(val sharedPref: SharedPreferences?, val resources: Resour
         nextVMIndex++
 
         buttonVisibility.value = View.GONE
+    }
+
+    override fun editName() {
+        showName.value = View.GONE
+        showEdit.value = View.VISIBLE
+        buttonVisibility.value = View.GONE
+    }
+
+    override fun saveName() {
+
+        if (showEdit.value == View.GONE)
+            return
+
+        val profileDataString = sharedPref?.getString(PROFILE,"{}")
+        val data = Gson().fromJson(profileDataString, ProfileData::class.java)
+
+        var tempList = ArrayList<MediaElement>()
+
+        if(data?.mediaList != null)
+            tempList.addAll(data.mediaList)
+
+        for(i in 0..tempList.size-1) {
+            if(tempList[i].mediaType.equals("name")) {
+                tempList.removeAt(i)
+                break
+            }
+        }
+
+        tempList.add(MediaElement("name", name.value))
+
+        val dataToSave = Gson().toJson(ProfileData(tempList))
+
+        val editor = sharedPref?.edit()
+        editor?.putString(PROFILE, dataToSave)
+        editor?.apply()
+
+        showEdit.value = View.GONE
+        showName.value = View.VISIBLE
+
+        if(nextVMIndex < 5)
+            buttonVisibility.value = View.VISIBLE
     }
 }
