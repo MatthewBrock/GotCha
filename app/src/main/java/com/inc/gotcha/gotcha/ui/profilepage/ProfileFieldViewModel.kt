@@ -51,6 +51,8 @@ class ProfileFieldViewModel(val hasContent: Boolean, val handle: String?, var ty
 
         //will be fixed with enums
         mediaType.value = type.toLowerCase()
+
+        setColorAndIcon()
     }
 
     override fun onSaveClicked() {
@@ -80,28 +82,28 @@ class ProfileFieldViewModel(val hasContent: Boolean, val handle: String?, var ty
 
     fun setColorAndIcon() {
         if(mediaType.value.equals("email")) {
-            icon.value = resources.getDrawable(R.drawable.img_email)
+            icon.value = resources.getDrawable(R.drawable.icn_email_square)
             color.value = resources.getColor(R.color.email_color)
         } else if(mediaType.value.equals("phone")) {
-            icon.value = resources.getDrawable(R.drawable.img_phone)
+            icon.value = resources.getDrawable(R.drawable.icn_phone_square)
             color.value = resources.getColor(R.color.phone_color)
         } else if(mediaType.value.equals("kik")) {
-            icon.value = resources.getDrawable(R.drawable.img_kik)
+            icon.value = resources.getDrawable(R.drawable.icn_kik_square)
             color.value = resources.getColor(R.color.kik_color)
         } else if(mediaType.value.equals("facebook")) {
-            icon.value = resources.getDrawable(R.drawable.img_facebook)
+            icon.value = resources.getDrawable(R.drawable.icn_facebook_square)
             color.value = resources.getColor(R.color.fb_color)
         } else if(mediaType.value.equals("twitter")) {
-            icon.value = resources.getDrawable(R.drawable.img_twitter)
+            icon.value = resources.getDrawable(R.drawable.icn_twitter_square)
             color.value = resources.getColor(R.color.twitter_color)
         } else if(mediaType.value.equals("instagram")) {
-            icon.value = resources.getDrawable(R.drawable.img_instagram)
+            icon.value = resources.getDrawable(R.drawable.icn_instagram_square)
             color.value = resources.getColor(R.color.insta_color)
         } else if(mediaType.value.equals("youtube")) {
-            icon.value = resources.getDrawable(R.drawable.img_youtube)
+            icon.value = resources.getDrawable(R.drawable.icn_youtube_square)
             color.value = resources.getColor(R.color.youtube_color)
         } else if(mediaType.value.equals("linkedin")) {
-            icon.value = resources.getDrawable(R.drawable.img_linkedin)
+            icon.value = resources.getDrawable(R.drawable.icn_linkedin_square)
             color.value = resources.getColor(R.color.linkedin_color)
         } else {
             icon.value = null
