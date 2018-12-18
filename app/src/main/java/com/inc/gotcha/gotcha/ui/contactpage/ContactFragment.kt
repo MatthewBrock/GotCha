@@ -43,9 +43,9 @@ class ContactFragment : Fragment() {
         super.onStart()
         val args: ContactFragmentArgs = ContactFragmentArgs.fromBundle(arguments)
         add_friend_button.setOnClickListener { saveProfile() }
-        profile = Gson().fromJson(args.contact, ProfileData::class.java)
-        if (context != null && profile != null) {
-            contact_info_card_view_pager.adapter = MediaElementViewPagerAdapter(context!!, profile!!.mediaList.take(5))
+        profile = Gson().fromJson<ProfileData>(args.contact, ProfileData::class.java)
+        if (context != null && profile != null && profile is ProfileData) {
+            contact_info_card_view_pager.adapter = MediaElementViewPagerAdapter(context!!, profile!!.mediaList.take(5), profile as ProfileData)
         }
         setTouchListener(first_image, 0)
         setTouchListener(second_image, 1)

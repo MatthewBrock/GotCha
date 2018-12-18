@@ -22,11 +22,6 @@ class ContactRecyclerViewAdapter(private val profileList: List<ProfileData>, pri
         val subTitle: TextView = view.findViewById(R.id.subTitle)
         val likeImage: ImageView = view.findViewById(R.id.like_image)
         val touchArea: View = view.findViewById(R.id.touchable_area)
-
-        init {
-            likeImage.setOnClickListener { likeImage.setImageResource(R.drawable.btn_fav_red) }
-            touchArea.setOnClickListener { adapterCallbacks.openContactPage(profileList[position]) }
-        }
     }
 
 
@@ -41,7 +36,9 @@ class ContactRecyclerViewAdapter(private val profileList: List<ProfileData>, pri
 
     override fun onBindViewHolder(holder: ContactListViewHolder, position: Int) {
         val profileData = profileList[position]
-        holder.title?.text = "Name"
+        holder.title?.text = profileData.name
+        holder.likeImage.setOnClickListener { holder.likeImage.setImageResource(R.drawable.btn_fav_red) }
+        holder.touchArea.setOnClickListener { adapterCallbacks.openContactPage(profileList[position]) }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
