@@ -35,12 +35,8 @@ class ProfileViewModel(val sharedPref: SharedPreferences?, val resources: Resour
 
         name.value = "Name Here"
 
-        for(i in 0..mediaList.size-1) {
-            if(mediaList[i].mediaType.equals("name")) {
-                name.value = mediaList[i].mediaHandle
-                mediaList.removeAt(i)
-                break
-            }
+        if(data.name != null) {
+            name.value = data.name
         }
 
         for(i in 0..Math.min(5, mediaList.size) - 1) {
@@ -71,7 +67,7 @@ class ProfileViewModel(val sharedPref: SharedPreferences?, val resources: Resour
 
         tempList.add(MediaElement(mediaType?.toLowerCase(), mediaHandle))
 
-        val dataToSave = Gson().toJson(ProfileData(tempList))
+        val dataToSave = Gson().toJson(ProfileData(name.value, tempList))
 
         val editor = sharedPref?.edit()
         editor?.putString(PROFILE, dataToSave)
@@ -99,7 +95,7 @@ class ProfileViewModel(val sharedPref: SharedPreferences?, val resources: Resour
             }
         }
 
-        val dataToSave = Gson().toJson(ProfileData(tempList))
+        val dataToSave = Gson().toJson(ProfileData(name.value, tempList))
 
         val editor = sharedPref?.edit()
         editor?.putString(PROFILE, dataToSave)
@@ -135,16 +131,7 @@ class ProfileViewModel(val sharedPref: SharedPreferences?, val resources: Resour
         if(data?.mediaList != null)
             tempList.addAll(data.mediaList)
 
-        for(i in 0..tempList.size-1) {
-            if(tempList[i].mediaType.equals("name")) {
-                tempList.removeAt(i)
-                break
-            }
-        }
-
-        tempList.add(MediaElement("name", name.value))
-
-        val dataToSave = Gson().toJson(ProfileData(tempList))
+        val dataToSave = Gson().toJson(ProfileData(name.value, tempList))
 
         val editor = sharedPref?.edit()
         editor?.putString(PROFILE, dataToSave)
