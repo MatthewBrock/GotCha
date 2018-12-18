@@ -4,6 +4,8 @@
     <string name="got_cha_description">Touch the back of you friends phone, and tap below in order to find them!</string>
     <string name="beam_me_up">Beam Me Up!</string>
     <string name="find_friends">Find Your Friends</string>
+    <string name="scan_for_humans">Scan For Humans</string>
+    <string name="set_profile">Set Up Profile</string>
 
 
     <string name="profile_data">PROFILE_DATA</string>

@@ -31,6 +31,7 @@ class ContactFragment : Fragment() {
         val binding: ContactFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.contact_fragment, container, false)
         binding.viewmodel = viewModel
         binding.setLifecycleOwner(this)
+
         return binding.root
     }
 
